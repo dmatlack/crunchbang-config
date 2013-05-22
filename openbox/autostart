@@ -47,23 +47,23 @@ xfce4-power-manager &
 ## Start Thunar Daemon
 thunar --daemon &
 
-# Remap some keyboard keys (e.g. CAPSLOCK -> Ctrl)
+## Remap some keyboard keys (e.g. CAPSLOCK -> Ctrl)
 xmodmap $HOME/.Xmodmap
 
 ## Detect and configure touchpad. See 'man synclient' for more info.
-if egrep -iq 'touchpad' /proc/bus/input/devices; then
+if cat /proc/bus/input/devices | grep -i "trackpad\|touchpad"; then
   synclient TapButton1=0 &
 
-  # Enable two finger scrolling
+  ## Enable two finger scrolling
   synclient HorizTwoFingerScroll=1 &
   synclient VertTwoFingerScroll=1 &
 
-  # disable mouse when typing
+  ## disable mouse when typing
   syndaemon -k -i 2 -d &
 
-  # do some palm detection
-  # (https://wiki.archlinux.org/index.php/
-  #   Touchpad_Synaptics#Disable_Trackpad_while_Typing)
+  ## do some palm detection
+  ## (https://wiki.archlinux.org/index.php/
+  ##   Touchpad_Synaptics#Disable_Trackpad_while_Typing)
   synclient PalmDetect=1 &
   synclient PalmMinWidth=10 &
   synclient PalmMinZ=200 &

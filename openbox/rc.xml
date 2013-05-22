@@ -150,7 +150,7 @@
     </popupFixedPosition>
   </resize>
   <!-- You can reserve a portion of your screen where windows will not cover when
-       they are maximized, or when they are initially placed.
+       the are maximized, or when they are initially placed.
        Many programs reserve space automatically, but you can use this in other
        cases. -->
   <margins>
@@ -274,27 +274,27 @@
     <keybind key="W-Up">
       <action name="GrowToEdgeNorth"/>
     </keybind>
+
     <keybind key="A-f">
-      <action name="ToggleMaximizeFull" />
+      <action name="ToggleMaximize"/>
     </keybind>
-    <!--
+
     <keybind key="A-h">
       <action name="UnmaximizeFull"/>
       <action name="MaximizeVert"/>
       <action name="MoveResizeTo">
-        <width>640</width>
+        <x>0</x>
+        <width client="yes">639</width>
       </action>
-      <action name="MoveToEdgeWest"/>
     </keybind>
     <keybind key="A-l">
       <action name="UnmaximizeFull"/>
       <action name="MaximizeVert"/>
       <action name="MoveResizeTo">
-        <width>640</width>
+        <x>-0</x>
+        <width client="yes">639</width>
       </action>
-      <action name="MoveToEdgeEast"/>
     </keybind>
-    -->
 
     <keybind key="Print">
       <action name="Execute">
@@ -964,6 +964,7 @@
 
   # end of the example
 -->
+
     <application name="terminator">
       <decor>no</decor>
     </application>
