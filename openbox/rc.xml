@@ -154,7 +154,7 @@
        Many programs reserve space automatically, but you can use this in other
        cases. -->
   <margins>
-    <top>1</top>
+    <top>18</top> <!-- umm... leave some room for conky pretty please -->
     <bottom>0</bottom>
     <left>0</left>
     <right>0</right>
@@ -964,6 +964,12 @@
 
   # end of the example
 -->
+    <application name="Conky">
+      <decor>no</decor>
+      <desktop>all</desktop>
+      <layer>above</layer>
+      <skip_taskbar>yes</skip_taskbar>
+    </application>
 
     <application name="terminator">
       <decor>no</decor>

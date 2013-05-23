@@ -31,8 +31,8 @@ hsetroot -solid "#2E3436" &
 (\
 nitrogen --restore && \
 cb-compositor --start && \
-sleep 2s && \
-tint2 \
+sleep 2s \
+##tint2 \
 ) &
 
 ## Volume control for systray
@@ -59,7 +59,7 @@ if cat /proc/bus/input/devices | grep -i "trackpad\|touchpad"; then
   synclient VertTwoFingerScroll=1 &
 
   ## disable mouse when typing
-  syndaemon -k -i 2 -d &
+  syndaemon -K -d &
 
   ## do some palm detection
   ## (https://wiki.archlinux.org/index.php/
@@ -94,4 +94,4 @@ cb-cowpowers &
 #(sleep 120s && cb-fortune) &
 
 ## Run the conky
-#conky -q &
+conky -q &

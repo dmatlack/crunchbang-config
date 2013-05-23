@@ -7,13 +7,13 @@
 [profiles]
   [[default]]
     scrollbar_position = hidden
-    palette = "#0d131a:#802635:#608040:#877c43:#1c678c:#684d80:#337373:#738080:#44484c:#b3354c:#4ba65a:#bf9f5f:#3995bf:#a64286:#6aaab3:#b3b3b3"
+    palette = "#1f2528:#802635:#608040:#877c43:#1c678c:#684d80:#337373:#738080:#3c3c3c:#b3354c:#4ba65a:#bf9f5f:#3995bf:#a64286:#6aaab3:#b3b3b3"
     alternate_screen_scroll = False
     background_darkness = 1.0
     scrollback_lines = 5000
     use_system_font = False
-    cursor_color = "#d8d8d8"
-    foreground_color = "#8a9499"
+    cursor_color = "#777777"
+    foreground_color = "#aec8d4"
     scroll_on_output = False
     icon_bell = False
     show_titlebar = False
