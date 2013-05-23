@@ -208,25 +208,25 @@
       </action>
     </keybind>
 
-    <keybind key="S-A-Left">
+    <keybind key="W-A-S-Left">
       <action name="SendToDesktop">
         <to>left</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Right">
+    <keybind key="W-A-S-Right">
       <action name="SendToDesktop">
         <to>right</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Up">
+    <keybind key="W-A-S-Up">
       <action name="SendToDesktop">
         <to>up</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Down">
+    <keybind key="W-A-S-Down">
       <action name="SendToDesktop">
         <to>down</to>
         <wrap>no</wrap>
@@ -259,22 +259,51 @@
     </keybind>
 
     <!-- Window Keybindings -->
-    <keybind key="W-q">
+    <keybind key="A-q">
       <action name="Close"/>
     </keybind>
-    <keybind key="W-Right">
-      <action name="GrowToEdgeEast"/>
-    </keybind>
-    <keybind key="W-Left">
-      <action name="GrowToEdgeWest"/>
-    </keybind>
-    <keybind key="W-Down">
-      <action name="GrowToEdgeSouth"/>
-    </keybind>
-    <keybind key="W-Up">
-      <action name="GrowToEdgeNorth"/>
-    </keybind>
 
+    <keybind key="A-Right">
+      <action name="ResizeRelative">
+        <right>2</right>
+      </action>
+    </keybind>
+    <keybind key="A-S-Right">
+      <action name="ResizeRelative">
+        <left>-2</left>
+      </action>
+    </keybind>
+    <keybind key="A-Left">
+      <action name="ResizeRelative">
+        <left>2</left>
+      </action>
+    </keybind>
+    <keybind key="A-S-Left">
+      <action name="ResizeRelative">
+        <right>-2</right>
+      </action>
+    </keybind>
+    <keybind key="A-Up">
+      <action name="ResizeRelative">
+        <up>2</up>
+      </action>
+    </keybind>
+    <keybind key="A-S-Up">
+      <action name="ResizeRelative">
+        <down>-2</down>
+      </action>
+    </keybind>
+    <keybind key="A-Down">
+      <action name="ResizeRelative">
+        <down>2</down>
+      </action>
+    </keybind>
+    <keybind key="A-S-Down">
+      <action name="ResizeRelative">
+        <up>-2</up>
+      </action>
+    </keybind>
+    
     <keybind key="A-f">
       <action name="ToggleMaximize"/>
     </keybind>
