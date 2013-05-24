@@ -59,14 +59,14 @@ if cat /proc/bus/input/devices | grep -i "trackpad\|touchpad"; then
   synclient VertTwoFingerScroll=1 &
 
   ## disable mouse when typing
-  syndaemon -K -d &
+  syndaemon -i 0.5 -d &
 
   ## do some palm detection
   ## (https://wiki.archlinux.org/index.php/
   ##   Touchpad_Synaptics#Disable_Trackpad_while_Typing)
-  synclient PalmDetect=1 &
-  synclient PalmMinWidth=10 &
-  synclient PalmMinZ=200 &
+  ##synclient PalmDetect=1 &
+  ##synclient PalmMinWidth=10 &
+  ##synclient PalmMinZ=200 &
 fi
 
 ## Start xscreensaver
