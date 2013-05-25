@@ -333,7 +333,7 @@
     </keybind>
 
     <!-- Keybindings for window switching -->
-    <keybind key="W-Tab">
+    <keybind key="A-Tab">
       <action name="NextWindow">
         <finalactions>
           <action name="Focus"/>
@@ -342,7 +342,7 @@
         </finalactions>
       </action>
     </keybind>
-    <keybind key="W-S-Tab">
+    <keybind key="A-S-Tab">
       <action name="PreviousWindow">
         <finalactions>
           <action name="Focus"/>
@@ -427,7 +427,7 @@
           <enabled>true</enabled>
           <name>Terminal</name>
         </startupnotify>
-        <command>terminator</command>
+        <command>urxvt</command>
       </action>
     </keybind>
 
@@ -475,7 +475,7 @@
           <enabled>true</enabled>
           <name>htop</name>
         </startupnotify>
-        <command>terminator --command="htop"</command>
+        <command>urxvt -e "htop"</command>
       </action>
     </keybind>
 
@@ -1005,6 +1005,9 @@
     </application>
 
     <application name="terminator">
+      <decor>no</decor>
+    </application>
+    <application name="urxvt">
       <decor>no</decor>
     </application>
 
