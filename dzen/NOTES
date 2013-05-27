@@ -1,0 +1,9 @@
+DZEN2
+=====
+
+More icons can be found in /usr/share/dzen2/bitmaps
+
+Documentation is in /usr/share/doc/dzen2
+
+The dzen2 at https://github.com/robm/dzen has a lot more features. At some
+point should try to use that.

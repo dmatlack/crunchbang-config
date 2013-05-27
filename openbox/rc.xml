@@ -150,7 +150,7 @@
        Many programs reserve space automatically, but you can use this in other
        cases. -->
   <margins>
-    <top>18</top> <!-- umm... leave some room for conky pretty please -->
+    <top>20</top> <!-- umm... leave some room for conky pretty please -->
     <bottom>0</bottom>
     <left>0</left>
     <right>0</right>
@@ -180,24 +180,36 @@
 
     <!-- Keybindings for desktop switching -->
     <keybind key="W-A-Left">
+      <action name="Execute">
+        <command>/home/david/.config/dzen/wm.sh</command>
+      </action>
       <action name="GoToDesktop">
         <to>left</to>
         <wrap>no</wrap>
       </action>
     </keybind>
     <keybind key="W-A-Right">
+      <action name="Execute">
+        <command>/home/david/.config/dzen/wm.sh</command>
+      </action>
       <action name="GoToDesktop">
         <to>right</to>
         <wrap>no</wrap>
       </action>
     </keybind>
     <keybind key="W-A-Up">
+      <action name="Execute">
+        <command>/home/david/.config/dzen/wm.sh</command>
+      </action>
       <action name="GoToDesktop">
         <to>up</to>
         <wrap>no</wrap>
       </action>
     </keybind>
     <keybind key="W-A-Down">
+      <action name="Execute">
+        <command>/home/david/.config/dzen/wm.sh</command>
+      </action>
       <action name="GoToDesktop">
         <to>down</to>
         <wrap>no</wrap>
@@ -205,24 +217,36 @@
     </keybind>
 
     <keybind key="W-A-S-Left">
+      <action name="Execute">
+        <command>/home/david/.config/dzen/wm.sh</command>
+      </action>
       <action name="SendToDesktop">
         <to>left</to>
         <wrap>no</wrap>
       </action>
     </keybind>
     <keybind key="W-A-S-Right">
+      <action name="Execute">
+        <command>/home/david/.config/dzen/wm.sh</command>
+      </action>
       <action name="SendToDesktop">
         <to>right</to>
         <wrap>no</wrap>
       </action>
     </keybind>
     <keybind key="W-A-S-Up">
+      <action name="Execute">
+        <command>/home/david/.config/dzen/wm.sh</command>
+      </action>
       <action name="SendToDesktop">
         <to>up</to>
         <wrap>no</wrap>
       </action>
     </keybind>
     <keybind key="W-A-S-Down">
+      <action name="Execute">
+        <command>/home/david/.config/dzen/wm.sh</command>
+      </action>
       <action name="SendToDesktop">
         <to>down</to>
         <wrap>no</wrap>
@@ -230,21 +254,33 @@
     </keybind>
 
     <keybind key="W-A-1">
+      <action name="Execute">
+        <command>/home/david/.config/dzen/wm.sh</command>
+      </action>
       <action name="GoToDesktop">
         <to>1</to>
       </action>
     </keybind>
     <keybind key="W-A-2">
+      <action name="Execute">
+        <command>/home/david/.config/dzen/wm.sh</command>
+      </action>
       <action name="GoToDesktop">
         <to>2</to>
       </action>
     </keybind>
     <keybind key="W-A-3">
+      <action name="Execute">
+        <command>/home/david/.config/dzen/wm.sh</command>
+      </action>
       <action name="GoToDesktop">
         <to>3</to>
       </action>
     </keybind>
     <keybind key="W-A-4">
+      <action name="Execute">
+        <command>/home/david/.config/dzen/wm.sh</command>
+      </action>
       <action name="GoToDesktop">
         <to>4</to>
       </action>
@@ -427,7 +463,7 @@
           <enabled>true</enabled>
           <name>Terminal</name>
         </startupnotify>
-        <command>urxvt</command>
+        <command>urxvtc</command>
       </action>
     </keybind>
 
@@ -475,7 +511,7 @@
           <enabled>true</enabled>
           <name>htop</name>
         </startupnotify>
-        <command>urxvt -e "htop"</command>
+        <command>urxvtc -e "htop"</command>
       </action>
     </keybind>
 
@@ -997,8 +1033,8 @@
 
   # end of the example
 -->
-    <application name="Conky">
-      <decor>no</decor>
+    <application name="*onky*">
+      <decor>yes</decor>
       <desktop>all</desktop>
       <layer>above</layer>
       <skip_taskbar>yes</skip_taskbar>
@@ -1007,7 +1043,7 @@
     <application name="terminator">
       <decor>no</decor>
     </application>
-    <application name="urxvt">
+    <application name="urxvt*">
       <decor>no</decor>
     </application>
 
