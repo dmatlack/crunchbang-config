@@ -86,5 +86,5 @@ xset b off &
 urxvtd &
 
 ## Run dzen
-/home/david/.config/dzen/dzen_main.sh &
+/home/david/.config/dzen/main.sh &
 sleep 1

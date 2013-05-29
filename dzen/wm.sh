@@ -20,13 +20,13 @@ named_pipe="/tmp/${0##*/}.pipe"
 
 
 function pager {
-  echo -n " "
+  #echo -n " "
   wmctrl -d | \
     awk '{
     if ($2 =="*")
-      printf "^bg(#78a4ff)^fg(#202020)"$10"^bg()^fg() "
+      printf "^bg(#78a4ff)^fg(#202020) "$10" ^bg()^fg() "
     else
-        printf ""$10" "
+        printf " "$10" "
     }'
   return
 }
