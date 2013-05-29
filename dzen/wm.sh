@@ -10,6 +10,16 @@
 #
 ###########################################################
 
+#XXX
+# There is a bug in here somewhere. When you first launch dzen2 (e.g.
+# when logging in) the window manager stuff doesn't appear for a while.
+# I think it waits until you switch workspaces for it to appear.
+#
+# In addition, sometimes it is possible to get 2 instances of the workspace
+# enumeration. To reproduce this try kill dzen2 from command line then 
+# starting it up again, then switching workspace (e.g. right).
+#XXX
+
 named_pipe="/tmp/${0##*/}.pipe"
 
 # create named_pipe to feed to dzen
