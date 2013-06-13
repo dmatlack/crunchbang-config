@@ -7,14 +7,20 @@
 #
 ###########################################################
 
-ICON_PATH="/home/david/.config/dzen/icons"
-ICON_COLOR="#78a4ff"
-ICON_DEAD_COLOR="#222222"
+DZEN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source $DZEN_DIR/style.sh
+
+ICON_PATH="$DZEN_DIR/icons"
+ICON_COLOR=${blue}
+ICON_DEAD_COLOR=${_black_}
 
 VOLUME_ICON="$ICON_PATH/vol.1.xbm"
 WIRELESS_ICON="$ICON_PATH/wireless1.xbm"
 
 CLOCK_FORMAT="%l:%M %p"
+
+SEP="^fg(${_black_})|^fg()"
 
 function icon_c {
   echo "^fg($2)^i($1)^fg()"
@@ -25,11 +31,11 @@ function icon {
 }
 
 function bar_c {
-  echo $1 | dzen2-gdbar -l "" -w 33 -min 0 -max 100 -o -nonl -fg $2 -bg \#303030
+  echo $1 | dzen2-gdbar -l "" -w 33 -min 0 -max 100 -o -nonl -fg $2 -bg ${_black_}
 }
 
 function bar {
-  bar_c $1 \#78a4ff
+  bar_c $1 ${blue}
 }
 
 battery() {
@@ -46,7 +52,7 @@ battery() {
   fi
 
   if [ $percentage -le 20 ]; then
-    echo "$(bar_c $percentage \#d75f5f) "
+    echo "$(bar_c $percentage ${red}) "
   else 
     echo "$(bar $percentage) "
   fi
@@ -80,11 +86,17 @@ function wireless {
     echo -n "$(icon $WIRELESS_ICON)"
     essid=$(iwconfig wlan0 | head -1 | cut -d: -f2 | tr -d '\" ')
     ip="$(ifconfig wlan0  | grep "inet addr" | cut -d: -f2 | cut -d" " -f1)"
-    echo -n " $essid:$ip"
+    if [ -z "$ip" ]; then
+      essid_color="${red}"
+    else 
+      essid_color="${_green_}"
+    fi
+    echo -n " ^fg(${essid_color})$essid^fg() ^fg(${_black_})$ip^fg()"
   else
     echo -n "$(icon_c $WIRELESS_ICON $ICON_DEAD_COLOR)"
     #quality="0"
   fi
+
   #echo -n "$(bar $quality)"
 }
 
@@ -93,9 +105,9 @@ function clock {
 }
 
 while :; do
-  echo -n "$(wireless) | "
-  echo -n "$(battery) | "
-  echo -n "$(volume) | "
+  echo -n "$(wireless) $SEP "
+  echo -n "$(battery) $SEP "
+  echo -n "$(volume) $SEP "
   echo    "$(clock) "
   sleep 0.5
 done
