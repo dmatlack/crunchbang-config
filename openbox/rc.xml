@@ -51,7 +51,7 @@
       S: shade (roll up/down)
       D: omnipresent (on all desktops).
   -->
-    <keepBorder>yes</keepBorder>
+    <keepBorder>no</keepBorder>
     <animateIconify>no</animateIconify>
     <font place="ActiveWindow">
       <name>Liberation Sans</name>
@@ -1012,7 +1012,7 @@
 
   # end of the example
 -->
-    <application name="*onky*">
+    <application name="*conky*">
       <decor>yes</decor>
       <desktop>all</desktop>
       <layer>above</layer>
