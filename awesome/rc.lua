@@ -124,7 +124,7 @@ batmon = awful.widget.progressbar()
 batmon:set_width(8)
 batmon:set_vertical(true)
 batmon:set_border_color("#3f3f3f")
-batmon:set_color("#5f5f5f")
+batmon:set_color("#5f8787")
 batmon_t = awful.tooltip({ objects = { batmon.widget },})
 vicious.register(batmon, vicious.widgets.bat, 
   function (widget, args)
@@ -400,13 +400,15 @@ client.add_signal("manage", function (c, startup)
     -- Add a titlebar
     -- awful.titlebar.add(c, { modkey = modkey })
 
-    -- Enable sloppy focus
+    -- Uncomment to Enable sloppy focus
+    --[[
     c:add_signal("mouse::enter", function(c)
         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
             and awful.client.focus.filter(c) then
             client.focus = c
         end
     end)
+    --]]
 
     if not startup then
         -- Set the windows at the slave,
