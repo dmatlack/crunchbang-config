@@ -1717,7 +1717,7 @@
 [hotkeys] # Hotkeys management interface
 
 # MouseWheel up-down axis Control (integer)
-#hotkeys-mousewheel-mode=0
+hotkeys-mousewheel-mode=2
 
 [sap] # Network streams (SAP)
 
@@ -3497,7 +3497,7 @@ qt-privacy-ask=0
 #audio=1
 
 # Default audio volume (integer)
-#volume=256
+volume=224
 
 # Audio output volume step (integer)
 #volume-step=32
@@ -3530,7 +3530,7 @@ qt-privacy-ask=0
 #audio-time-stretch=1
 
 # Audio output module (string)
-#aout=
+aout=alsa
 
 # Audio filters (string)
 #audio-filter=
