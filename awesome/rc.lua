@@ -42,7 +42,7 @@ end
 ---------------------------------- {{{ Variable definitions
 
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
+beautiful.init(".config/awesome/themes/chalk/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvtc"
@@ -60,11 +60,11 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
+    awful.layout.suit.floating,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
@@ -131,35 +131,39 @@ mytaglist.buttons = awful.util.table.join(
                     )
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
-                     awful.button({ }, 1, function (c)
-                                              if c == client.focus then
-                                                  c.minimized = true
-                                              else
-                                                  if not c:isvisible() then
-                                                      awful.tag.viewonly(c:tags()[1])
-                                                  end
-                                                  -- This will also un-minimize
-                                                  -- the client, if needed
-                                                  client.focus = c
-                                                  c:raise()
-                                              end
-                                          end),
-                     awful.button({ }, 3, function ()
-                                              if instance then
-                                                  instance:hide()
-                                                  instance = nil
-                                              else
-                                                  instance = awful.menu.clients({ width=250 })
-                                              end
-                                          end),
-                     awful.button({ }, 4, function ()
-                                              awful.client.focus.byidx(1)
-                                              if client.focus then client.focus:raise() end
-                                          end),
-                     awful.button({ }, 5, function ()
-                                              awful.client.focus.byidx(-1)
-                                              if client.focus then client.focus:raise() end
-                                          end))
+
+        awful.button({ }, 1, function (c)
+          if c == client.focus then
+              c.minimized = true
+          else
+              if not c:isvisible() then
+                  awful.tag.viewonly(c:tags()[1])
+              end
+              -- This will also un-minimize
+              -- the client, if needed
+              client.focus = c
+              c:raise()
+          end
+        end),
+
+        awful.button({ }, 3, function ()
+          if instance then
+              instance:hide()
+              instance = nil
+          else
+              instance = awful.menu.clients({ width=250 })
+          end
+        end),
+
+        awful.button({ }, 4, function ()
+          awful.client.focus.byidx(1)
+          if client.focus then client.focus:raise() end
+        end),
+
+        awful.button({ }, 5, function ()
+          awful.client.focus.byidx(-1)
+          if client.focus then client.focus:raise() end
+        end))
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
@@ -168,17 +172,21 @@ for s = 1, screen.count() do
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)
     mylayoutbox[s]:buttons(awful.util.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-                           awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
+       awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
+       awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
+       awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
+       awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
     -- Create a taglist widget
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.label.all, mytaglist.buttons)
 
     -- Create a tasklist widget
-    mytasklist[s] = awful.widget.tasklist(function(c)
-                                              return awful.widget.tasklist.label.currenttags(c, s)
-                                          end, mytasklist.buttons)
+    mytasklist[s] = awful.widget.tasklist(
+      function(c)
+        local text, bg, status_image, icon = 
+        awful.widget.tasklist.label.currenttags(c, s)
+        -- return nil for the icon because we don't want to display one
+        return text, bg, status_image, nil
+      end, mytasklist.buttons)
 
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s })
