@@ -87,4 +87,3 @@ urxvtd &
 
 ## Run dzen
 /home/david/.config/dzen/main.sh &
-sleep 1

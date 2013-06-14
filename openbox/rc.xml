@@ -1023,6 +1023,7 @@
     </application>
     <application name="urxvt*">
       <decor>no</decor>
+      <maximized>true</maximized>
     </application>
     <application name="gmessage">
       <decor>no</decor>
