@@ -3456,7 +3456,7 @@ qt-privacy-ask=0
 [alsa] # ALSA audio output
 
 # Audio output device (string)
-#alsa-audio-device=default
+alsa-audio-device=sysdefault:CARD=NVidia
 
 # Audio output channels (integer)
 #alsa-audio-channels=6
