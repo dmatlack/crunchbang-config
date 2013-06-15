@@ -120,21 +120,22 @@ mytextclock = awful.widget.textclock({ align = "right" })
 mysystray = widget({ type = "systray" })
 
 -- Battery widget
-batmon = awful.widget.progressbar()
-batmon:set_width(8)
-batmon:set_vertical(true)
-batmon:set_border_color("#3f3f3f")
-batmon:set_color("#5f8787")
-batmon_t = awful.tooltip({ objects = { batmon.widget },})
-vicious.register(batmon, vicious.widgets.bat, 
-  function (widget, args)
-    batmon_t:set_text(" State: " .. args[1] .. " | Charge: " .. args[2] .. "% | Remaining: " .. args[3])
-    if args[2] <= 5 then
-      naughty.notify({ text="Battery is low! " .. args[2] .. " percent remaining." })
-    end
-    return args[2]
-  end , 60, "BAT0")
-
+--batmon = awful.widget.progressbar()
+--batmon:set_width(8)
+--batmon:set_vertical(true)
+--batmon:set_border_color("#3f3f3f")
+--batmon:set_color("#5f8787")
+--batmon_t = awful.tooltip({ objects = { batmon.widget },})
+--vicious.register(batmon, vicious.widgets.bat, 
+--  function (widget, args)
+--    batmon_t:set_text(" State: " .. args[1] .. " | Charge: " .. args[2] .. "% | Remaining: " .. args[3])
+--    if args[2] <= 5 then
+--      naughty.notify({ text="Battery is low! " .. args[2] .. " percent remaining." })
+--    end
+--    return args[2]
+--  end , 60, "BAT0")
+batwi = widget({ type = "textbox" })
+vicious.register(batwi, vicious.widgets.bat, " $1$2% ", 61, "BAT0")
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -213,14 +214,14 @@ for s = 1, screen.count() do
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = {
         {
-            mylauncher,
+            --mylauncher,
             mytaglist[s],
             mypromptbox[s],
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
         mytextclock,
-        batmon.widget,
+        batwi,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
@@ -381,7 +382,8 @@ awful.rules.rules = {
                      border_color = beautiful.border_normal,
                      focus = true,
                      keys = clientkeys,
-                     buttons = clientbuttons } },
+                     buttons = clientbuttons, 
+                     size_hints_honor = false } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },

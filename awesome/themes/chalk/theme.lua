@@ -15,10 +15,10 @@ theme.wallpaper_cmd = { "awsetbg /usr/share/awesome/themes/zenburn/zenburn-backg
 theme.font      = "sans 8"
 
 -- {{{ Colors
-theme.fg_normal = "#DCDCCC"
-theme.fg_focus  = "#F0DFAF"
+theme.fg_normal = "#666666"
+theme.fg_focus  = "#87af5f"
 theme.fg_urgent = "#CC9393"
-theme.bg_normal = "#3F3F3F"
+theme.bg_normal = "#1E2320"
 theme.bg_focus  = "#1E2320"
 theme.bg_urgent = "#3F3F3F"
 -- }}}
@@ -26,7 +26,7 @@ theme.bg_urgent = "#3F3F3F"
 -- {{{ Borders
 theme.border_width  = "3"
 theme.border_normal = "#3F3F3F"
-theme.border_focus  = "#beed5f"
+theme.border_focus  = "#87af5f"
 theme.border_marked = "#CC9393"
 -- }}}
 
@@ -49,7 +49,7 @@ theme.titlebar_bg_normal = "#3F3F3F"
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
---theme.fg_widget        = "#AECF96"
+--theme.fg_widget        = "#000000"
 --theme.fg_center_widget = "#88A175"
 --theme.fg_end_widget    = "#FF5656"
 --theme.bg_widget        = "#494B4F"
