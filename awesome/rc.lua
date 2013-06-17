@@ -85,7 +85,8 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag({ "main", "www", 3, 4, 5, 6, 7 }, s,
+                        { layouts[1], layouts[10], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1] })
 end
 
 ---------------------------------- }}}
@@ -113,29 +114,36 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 ---------------------------------- }}}
 
 ---------------------------------- {{{ Wibox
--- Create a textclock widget
-mytextclock = awful.widget.textclock({ align = "right" })
 
--- Create a systray
-mysystray = widget({ type = "systray" })
+-- TIME
+time_widget = widget({ type = "textbox" })
+vicious.register(time_widget, vicious.widgets.date, 
+                 "<span color='" .. beautiful.fg_widget .. "'>%b %d, %R </span>", 
+                 60)
 
--- Battery widget
---batmon = awful.widget.progressbar()
---batmon:set_width(8)
---batmon:set_vertical(true)
---batmon:set_border_color("#3f3f3f")
---batmon:set_color("#5f8787")
---batmon_t = awful.tooltip({ objects = { batmon.widget },})
---vicious.register(batmon, vicious.widgets.bat, 
---  function (widget, args)
---    batmon_t:set_text(" State: " .. args[1] .. " | Charge: " .. args[2] .. "% | Remaining: " .. args[3])
---    if args[2] <= 5 then
---      naughty.notify({ text="Battery is low! " .. args[2] .. " percent remaining." })
---    end
---    return args[2]
---  end , 60, "BAT0")
-batwi = widget({ type = "textbox" })
-vicious.register(batwi, vicious.widgets.bat, " $1$2% ", 61, "BAT0")
+-- SYSTRAY
+-- systray_widget = widget({ type = "systray" })
+
+-- BATTERY
+battery_widget = widget({ type = "textbox" })
+vicious.register(battery_widget, vicious.widgets.bat, 
+                 "<span color='" .. beautiful.fg_widget .. "'>$2$1</span>", 
+                 61, "BAT0")
+
+-- SEPARATOR
+separator = widget({ type = "textbox" })
+separator.text = " <span color='" .. beautiful.fg_focus .. "'>| </span>"
+
+-- WIFI
+wifi_widget = widget({ type = "textbox" })
+vicious.register(wifi_widget, vicious.widgets.wifi,
+                 "<span color='" .. beautiful.fg_widget .. "'>" ..
+                 "${ssid}</span>", 
+                 60, "wlan0")
+
+taglist_separator = widget({ type = "textbox" })
+taglist_separator.text = "| "
+
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -217,12 +225,16 @@ for s = 1, screen.count() do
             --mylauncher,
             mytaglist[s],
             mypromptbox[s],
+            taglist_separator,
             layout = awful.widget.layout.horizontal.leftright
         },
         mylayoutbox[s],
-        mytextclock,
-        batwi,
-        s == 1 and mysystray or nil,
+        time_widget,
+        separator,
+        battery_widget,
+        separator,
+        wifi_widget,
+        taglist_separator,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
@@ -280,7 +292,7 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal_tmux) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+    --awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
@@ -295,6 +307,13 @@ globalkeys = awful.util.table.join(
 
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    --awful.key({ modkey },             "r", 
+              --function ()
+                --awful.util.spawn("dmenu_run -i -p 'Run command:' -nb '" .. 
+                --beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal .. 
+                --"' -sb '" .. beautiful.bg_focus .. 
+                --"' -sf '" .. beautiful.fg_focus .. "'") 
+             --end),
 
     awful.key({ modkey }, "x",
               function ()

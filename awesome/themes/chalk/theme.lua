@@ -12,11 +12,11 @@ theme.wallpaper_cmd = { "awsetbg /usr/share/awesome/themes/zenburn/zenburn-backg
 -- }}}
 
 -- {{{ Styles
-theme.font      = "sans 8"
+theme.font      = "Inconsolata 10"
 
 -- {{{ Colors
-theme.fg_normal = "#666666"
-theme.fg_focus  = "#87af5f"
+theme.fg_normal = "#a0a0a0"
+theme.fg_focus  = "#6CE05C"
 theme.fg_urgent = "#CC9393"
 theme.bg_normal = "#1E2320"
 theme.bg_focus  = "#1E2320"
@@ -24,9 +24,9 @@ theme.bg_urgent = "#3F3F3F"
 -- }}}
 
 -- {{{ Borders
-theme.border_width  = "3"
-theme.border_normal = "#3F3F3F"
-theme.border_focus  = "#87af5f"
+theme.border_width  = "5"
+theme.border_normal = "#1F1F1F"
+theme.border_focus  = "#3F3F3F"
 theme.border_marked = "#CC9393"
 -- }}}
 
@@ -49,7 +49,7 @@ theme.titlebar_bg_normal = "#3F3F3F"
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
---theme.fg_widget        = "#000000"
+theme.fg_widget        = "#a0a0a0"
 --theme.fg_center_widget = "#88A175"
 --theme.fg_end_widget    = "#FF5656"
 --theme.bg_widget        = "#494B4F"
@@ -79,7 +79,7 @@ theme.taglist_squares_unsel = "/usr/share/awesome/themes/zenburn/taglist/squarez
 -- {{{ Misc
 theme.awesome_icon           = "/usr/share/awesome/themes/zenburn/awesome-icon.png"
 theme.menu_submenu_icon      = "/usr/share/awesome/themes/default/submenu.png"
-theme.tasklist_floating_icon = "/usr/share/awesome/themes/default/tasklist/floatingw.png"
+theme.tasklist_floating_icon = "/home/david/.config/awesome/themes/chalk/cloud.png"
 -- }}}
 
 -- {{{ Layout
