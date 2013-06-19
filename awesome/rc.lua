@@ -44,10 +44,13 @@ end
 
 ---------------------------------- {{{ Variable definitions
 
--- Themes define colours, icons, and wallpapers
-beautiful.init(".config/awesome/themes/chalk/theme.lua")
+home = os.getenv("HOME")
+conf = home .. "/.config/awesome"
+themes = conf .. "/themes"
+active_theme = themes .. "/chalk"
 
--- This is used later as the default terminal and editor to run.
+beautiful.init(active_theme .. "/theme.lua")
+
 terminal = "urxvtc"
 terminal_tmux = terminal .. " -e tmux"
 editor = os.getenv("EDITOR") or "vim"
@@ -85,7 +88,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ "main", "www", 3, 4, 5, 6, 7 }, s,
+    tags[s] = awful.tag({ "main", "www", "todo", 4, 5, 6, 7 }, s,
                         { layouts[1], layouts[10], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1] })
 end
 
@@ -127,8 +130,32 @@ vicious.register(time_widget, vicious.widgets.date,
 -- BATTERY
 battery_widget = widget({ type = "textbox" })
 vicious.register(battery_widget, vicious.widgets.bat, 
-                 "<span color='" .. beautiful.fg_widget .. "'>$2$1</span>", 
-                 61, "BAT0")
+  function (widget, args)
+    local percent = args[2]
+    local state = args[1]
+    local color
+    if (percent <= 20) then
+      color = "#F05178"
+      if (percent % 5 == 0 or percent < 5) then
+        naughty.notify({
+          title = "Battery Low",
+          text = percent .. "% remaining",
+          margin = 15,
+          timeout = 5,
+          position = "top_right",
+          --icon = beautiful.widget_mail_notify,
+          fg = color,
+          bg = beautiful.bg_normal
+        })
+      end
+    elseif (state == "+") then
+      color = "#97A4F7"
+    else 
+      color = beautiful.fg_widget
+    end
+    return "<span color='" .. color .. "'>" .. percent .. state .. "</span>"
+  end,
+  60, "BAT0")
 
 -- SEPARATOR
 separator = widget({ type = "textbox" })
@@ -276,18 +303,22 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "w", function () mymainmenu:show({keygrabber=true}) end),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
-    awful.key({ modkey,           }, "Tab",
+    awful.key({ modkey, "Shift"   }, "j",   function () awful.client.swap.byidx(  1)    end),
+    awful.key({ modkey, "Shift"   }, "k",   function () awful.client.swap.byidx( -1)    end),
+    awful.key({ modkey, "Control" }, "j",   function () awful.screen.focus_relative( 1) end),
+    awful.key({ modkey, "Control" }, "k",   function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey,           }, "u",   awful.client.urgent.jumpto),
+    awful.key({ modkey,           }, "Tab", 
         function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
+            awful.client.focus.byidx( 1)
+            if client.focus then client.focus:raise() end
         end),
+        --function ()
+        --    awful.client.focus.history.previous()
+        --    if client.focus then
+        --        client.focus:raise()
+        --    end
+        --end),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal_tmux) end),
@@ -409,6 +440,13 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
+    { rule = { name = "chromium" },
+      properties = { border_width = 0 } },
+
+    -- miscellaneous window rules (e.g. random windows I want to float)
+    { rule = { name = "chip8" },
+      properties = { floating = true } },
+
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
@@ -460,7 +498,7 @@ function run_once(cmd)
 end
 
 -- systray volume control
-run_once("pnmixer")
+--run_once("pnmixer")
 
 -- custom keybindings
 run_once("xmodmap ~/.Xmodmap")
@@ -470,9 +508,6 @@ run_once("synclient TapButton1=0")
 run_once("synclient HorizTwoFingerScroll=1")
 run_once("synclient VertTwoFingerScroll=1")
 run_once("syndaemon -i 0.5 -d")
-
--- xscreensaver
-run_once("xscreensaver -no-splash")
 
 -- turn on the urxvt server daemon
 run_once("urxvtd")
