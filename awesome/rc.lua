@@ -89,7 +89,7 @@ tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
     tags[s] = awful.tag({ "main", "www", "todo", 4, 5, 6, 7 }, s,
-                        { layouts[1], layouts[10], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1] })
+                        { layouts[1], layouts[11], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1] })
 end
 
 ---------------------------------- }}}
@@ -117,11 +117,16 @@ mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
 ---------------------------------- }}}
 
 ---------------------------------- {{{ Wibox
+red = "<span color='#F05178'>"
+blue = "<span color='#97A4F7'>"
+grey = "<span color='#444444'>"
+white = "<span color='" .. beautiful.fg_widget .. "'>"
+endspan = "</span>"
 
 -- TIME
 time_widget = widget({ type = "textbox" })
 vicious.register(time_widget, vicious.widgets.date, 
-                 "<span color='" .. beautiful.fg_widget .. "'>%b %d, %R </span>", 
+                 white .. "%b %d, %R " .. endspan, 
                  60)
 
 -- SYSTRAY
@@ -133,27 +138,22 @@ vicious.register(battery_widget, vicious.widgets.bat,
   function (widget, args)
     local percent = args[2]
     local state = args[1]
-    local color
     if (percent <= 20) then
-      color = "#F05178"
       if (percent % 5 == 0 or percent < 5) then
         naughty.notify({
           title = "Battery Low",
-          text = percent .. "% remaining",
-          margin = 15,
+          text = red .. percent .. "% remaining" .. endspan,
           timeout = 5,
-          position = "top_right",
-          --icon = beautiful.widget_mail_notify,
-          fg = color,
-          bg = beautiful.bg_normal
+          fg = "#e3e3e3",
+          bg = "#252525"
         })
       end
+      return red .. percent .. state .. endspan
     elseif (state == "+") then
-      color = "#97A4F7"
+      return blue .. percent .. state .. endspan
     else 
-      color = beautiful.fg_widget
+      return white .. percent .. state .. endspan
     end
-    return "<span color='" .. color .. "'>" .. percent .. state .. "</span>"
   end,
   60, "BAT0")
 
@@ -167,6 +167,18 @@ vicious.register(wifi_widget, vicious.widgets.wifi,
                  "<span color='" .. beautiful.fg_widget .. "'>" ..
                  "${ssid}</span>", 
                  60, "wlan0")
+
+-- VOLUME
+volume_widget = widget({ type = "textbox" })
+vicious.register(volume_widget, vicious.widgets.volume,
+  function (widget, args)
+    if (args[2] ~= "♩" ) then
+      return white .. "Vol " .. endspan .. blue .. args[1] .. endspan
+    else
+      return white .. "Vol " .. endspan .. blue .. "mute" .. endspan
+    end
+  end, 5, 
+  "Master")
 
 taglist_separator = widget({ type = "textbox" })
 taglist_separator.text = "| "
@@ -261,6 +273,8 @@ for s = 1, screen.count() do
         battery_widget,
         separator,
         wifi_widget,
+        separator,
+        volume_widget,
         taglist_separator,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
